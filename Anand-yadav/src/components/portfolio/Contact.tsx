@@ -1,0 +1,166 @@
+import { useState } from 'react';
+import { Mail, Github, MapPin, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'ay108679@gmail.com',
+    href: 'mailto:ay108679@gmail.com',
+  },
+  {
+    icon: Github,
+    label: 'GitHub',
+    value: 'Anandyadav04',
+    href: 'https://github.com/Anandyadav04',
+  },
+  {
+    icon: MapPin,
+    label: 'Location',
+    value: 'Thane, Maharashtra',
+    href: null,
+  },
+];
+
+const Contact = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+    window.location.href = `mailto:ay108679@gmail.com?subject=${subject}&body=${body}`;
+    
+    toast({
+      title: "Opening email client",
+      description: "Your default email app will open with the message.",
+    });
+    
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  return (
+    <section id="contact" className="section-padding bg-secondary/30">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Get In <span className="text-gradient">Touch</span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
+            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+              Feel free to reach out for internships, collaboration, or project discussions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Contact Form */}
+            <Card className="glass">
+              <CardContent className="p-6">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <Input
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="bg-secondary/50 border-border/50 focus:border-primary"
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="bg-secondary/50 border-border/50 focus:border-primary"
+                    />
+                  </div>
+                  <div>
+                    <Textarea
+                      placeholder="Your Message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      required
+                      rows={5}
+                      className="bg-secondary/50 border-border/50 focus:border-primary resize-none"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full bg-gradient-primary">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            {/* Contact Info */}
+            <div className="space-y-4">
+              {contactInfo.map((item, index) => (
+                <Card key={index} className="glass hover:shadow-lg transition-shadow">
+                  <CardContent className="p-5">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 rounded-lg bg-primary/10">
+                        <item.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">{item.label}</p>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            target={item.href.startsWith('http') ? '_blank' : undefined}
+                            rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            className="font-medium text-foreground hover:text-primary transition-colors"
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="font-medium text-foreground">{item.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {/* Call to Action */}
+              <Card className="glass border-primary/30">
+                <CardContent className="p-6 text-center">
+                  <p className="text-muted-foreground mb-4">
+                    Open to internship opportunities and exciting projects!
+                  </p>
+                  <Button
+                    variant="outline"
+                    className="border-primary/30 hover:bg-primary/10"
+                    asChild
+                  >
+                    <a href="mailto:ay108679@gmail.com">
+                      <Mail className="h-4 w-4 mr-2" />
+                      Let's Connect
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
