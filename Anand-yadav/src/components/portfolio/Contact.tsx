@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Github, MapPin, Send } from 'lucide-react';
+import { Mail, Github, MapPin, Send , Linkedin} from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 import { Button } from '@/components/ui/button';
@@ -192,10 +192,15 @@ const Contact = () => {
                     className="border-primary/30 hover:bg-primary/10"
                     asChild
                   >
-                    <a href="mailto:ay108679@gmail.com">
-                      <Mail className="h-4 w-4 mr-2" />
-                      Let's Connect
-                    </a>
+                  <a
+                    href="https://www.linkedin.com/in/anand-yadav-149414356"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin className="h-4 w-4 mr-2" />
+                    Let's Connect
+                  </a>
+
                   </Button>
                 </CardContent>
               </Card>
