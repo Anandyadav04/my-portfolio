@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Mail, Github, MapPin, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -29,26 +31,48 @@ const contactInfo = [
 
 const Contact = () => {
   const { toast } = useToast();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    window.location.href = `mailto:ay108679@gmail.com?subject=${subject}&body=${body}`;
-    
-    toast({
-      title: "Opening email client",
-      description: "Your default email app will open with the message.",
-    });
-    
-    setFormData({ name: '', email: '', message: '' });
+    setLoading(true);
+
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        toast({
+          title: 'Message sent',
+          description: 'Thanks for reaching out! I will get back to you soon.',
+        });
+
+        setFormData({ name: '', email: '', message: '' });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        toast({
+          title: 'Failed to send message',
+          description: 'Please try again later.',
+          variant: 'destructive',
+        });
+        setLoading(false);
+      });
   };
 
   return (
@@ -71,38 +95,45 @@ const Contact = () => {
             <Card className="glass">
               <CardContent className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Input
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="bg-secondary/50 border-border/50 focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="bg-secondary/50 border-border/50 focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder="Your Message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                      rows={5}
-                      className="bg-secondary/50 border-border/50 focus:border-primary resize-none"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full bg-gradient-primary">
+                  <Input
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    required
+                    className="bg-secondary/50 border-border/50 focus:border-primary"
+                  />
+
+                  <Input
+                    type="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
+                    className="bg-secondary/50 border-border/50 focus:border-primary"
+                  />
+
+                  <Textarea
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    required
+                    rows={5}
+                    className="bg-secondary/50 border-border/50 focus:border-primary resize-none"
+                  />
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-primary"
+                    disabled={loading}
+                  >
                     <Send className="h-4 w-4 mr-2" />
-                    Send Message
+                    {loading ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </CardContent>
@@ -111,25 +142,38 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-4">
               {contactInfo.map((item, index) => (
-                <Card key={index} className="glass hover:shadow-lg transition-shadow">
+                <Card
+                  key={index}
+                  className="glass hover:shadow-lg transition-shadow"
+                >
                   <CardContent className="p-5">
                     <div className="flex items-center gap-4">
                       <div className="p-3 rounded-lg bg-primary/10">
                         <item.icon className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">{item.label}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {item.label}
+                        </p>
                         {item.href ? (
                           <a
                             href={item.href}
-                            target={item.href.startsWith('http') ? '_blank' : undefined}
-                            rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            target={
+                              item.href.startsWith('http') ? '_blank' : undefined
+                            }
+                            rel={
+                              item.href.startsWith('http')
+                                ? 'noopener noreferrer'
+                                : undefined
+                            }
                             className="font-medium text-foreground hover:text-primary transition-colors"
                           >
                             {item.value}
                           </a>
                         ) : (
-                          <p className="font-medium text-foreground">{item.value}</p>
+                          <p className="font-medium text-foreground">
+                            {item.value}
+                          </p>
                         )}
                       </div>
                     </div>
