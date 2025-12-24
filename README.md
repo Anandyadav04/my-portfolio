@@ -23,7 +23,9 @@ It is built using modern web technologies and deployed for public access.
 - Toast notifications
 - Clean & minimal design
 
+---
+
 ## 📬 Contact
-Email: ay108679@gmail.com
-LinkedIn: www.linkedin.com/in/anand-yadav-149414356
-Location: Thane, Maharashtra
+- Email: ay108679@gmail.com
+- LinkedIn: www.linkedin.com/in/anand-yadav-149414356
+- Location: Thane, Maharashtra
