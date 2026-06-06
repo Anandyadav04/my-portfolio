@@ -1,157 +1,241 @@
-import { ExternalLink, Github, Stethoscope, BookOpen, Plane } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, Github, Stethoscope, BookOpen, MessageSquare, ShieldCheck, Layers, Cpu, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const projects = [
   {
+    id: 'meditrack',
     title: 'MediTrack',
-    subtitle: 'Healthcare Web Application',
+    subtitle: 'AI Healthcare Platform',
+    category: 'ai',
     icon: Stethoscope,
+    glow: 'hover:border-teal-500/30 hover:shadow-teal-500/5',
     description:
-      'A Django-based healthcare management system that provides AI-based skin disease detection along with health utilities like BMI/BMR calculation, appointment booking, and medication reminders.',
-    features: [
-      'User authentication and role-based access',
-      'AI skin disease prediction using TensorFlow & OpenCV',
-      'Appointment booking system',
-      'BMI & BMR calculators',
-      'Medication reminders with email/SMS notifications',
-      'NGO and medical resource listings',
+      'A healthcare management system built using Django and SQLite, integrating machine learning modules for prediction and scheduling automation.',
+    achievements: [
+      'Built a healthcare management system using Django and SQLite.',
+      'Integrated a TensorFlow model for skin disease prediction.',
+      'Added appointment booking, automated reminders, and a patient dashboard.'
     ],
-    techStack: ['Python', 'Django', 'TensorFlow', 'OpenCV', 'SQLite/MySQL'],
+    techStack: ['Django', 'Python', 'TensorFlow', 'OpenCV', 'SQLite', 'MySQL'],
     github: 'https://github.com/Anandyadav04/MediTrack.git',
     live: null,
     featured: true,
   },
   {
-    title: 'StudyBitz',
-    subtitle: 'Learning Management System',
-    icon: BookOpen,
+    id: 'chatlance',
+    title: 'ChatLance',
+    subtitle: 'Real-Time Collaboration & Messenger Hub',
+    category: 'web',
+    icon: MessageSquare,
+    glow: 'hover:border-indigo-500/30 hover:shadow-indigo-500/5',
     description:
-      'A full-stack LMS with role-based access for Students, Instructors, and Admins, built using the MERN stack.',
-    features: [
-      'Role-based authentication using JWT',
-      'Course creation and enrollment',
-      'REST APIs for course and user management',
-      'State management using React Context API',
+      'A production-oriented real-time messaging application designed to demonstrate robust backend architectures, WebSockets, and secure state handling.',
+    achievements: [
+      'Scaled low-latency real-time chat, active presence status, and typing indicator events using Socket.IO.',
+      'Implemented token-based JWT sessions with secure HTTP-only cookies and bcrypt password hashing.',
+      'Engineered structured message schemas in MongoDB with indexes optimized for fast historical queries.'
     ],
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'JWT'],
+    techStack: ['React.js', 'Node.js', 'Express.js', 'Socket.IO', 'MongoDB', 'JWT', 'Tailwind CSS'],
+    github: 'https://github.com/Anandyadav04/chatLance.git',
+    live: null,
+    featured: true,
+  },
+  {
+    id: 'studybitz',
+    title: 'StudyBitz',
+    subtitle: 'StudyBitz Learning Portal (MERN)',
+    category: 'web',
+    icon: BookOpen,
+    glow: 'hover:border-violet-500/30 hover:shadow-violet-500/5',
+    description:
+      'A complete role-based learning portal (LMS) built with the MERN stack for Student, Instructor, and Admin access.',
+    achievements: [
+      'Developed a role-based LMS with JWT authentication and protected routes.',
+      'Designed REST APIs for course management, progress tracking, and user profiles.',
+      'Used MongoDB and React Context API for efficient data handling.'
+    ],
+    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Context API', 'Tailwind CSS'],
     github: 'https://github.com/Anandyadav04/mern-lms.git',
     live: 'https://studybitz.netlify.app',
     featured: true,
   },
   {
-    title: 'Travel Management System',
-    subtitle: 'Desktop Application',
-    icon: Plane,
+    id: 'ai-analysis',
+    title: 'RiskRead',
+    subtitle: 'AI Ingredient Analyzer',
+    category: 'ai',
+    icon: ShieldCheck,
+    glow: 'hover:border-amber-500/30 hover:shadow-amber-500/5',
     description:
-      'A desktop-based travel booking system allowing users to browse travel packages and manage bookings.',
-    features: [
-      'Browse travel packages',
-      'Booking management',
-      'User-friendly desktop interface',
+      'A Flask web application that scans packaged food labels, extracts ingredient names using OCR, and evaluates allergen safety risks.',
+    achievements: [
+      'Created a Flask web app that analyzes product labels for ingredient safety.',
+      'Used OpenCV and Tesseract OCR to extract text from images.',
+      'Classified ingredients by risk level and suggested healthier alternatives.'
     ],
-    techStack: ['Java Swing', 'MySQL'],
-    github: 'https://github.com/Anandyadav04/Travel-management-system.git',
+    techStack: ['Python', 'Flask', 'OpenCV', 'Tesseract OCR', 'Machine Learning', 'Pandas'],
+    github: 'https://github.com/Anandyadav04/ai-ingredient-analysis.git',
     live: null,
     featured: false,
   },
 ];
 
+import { useScrollReveal } from '@/hooks/use-scroll-reveal';
+
 const Projects = () => {
+  const { elementRef, isRevealed } = useScrollReveal();
+  const [filter, setFilter] = useState<'all' | 'web' | 'ai'>('all');
+
+  const filteredProjects = projects.filter(
+    (project) => filter === 'all' || project.category === filter
+  );
+
   return (
-    <section id="projects" className="section-padding bg-secondary/30">
+    <section
+      id="projects"
+      ref={elementRef}
+      className={`section-padding bg-secondary/15 relative overflow-hidden transition-all duration-1000 transform ${
+        isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}
+    >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Featured <span className="text-gradient">Projects</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              A showcase of my work in full-stack development, AI integration, and cloud technologies
+            <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full" />
+            <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-sm md:text-base">
+              A curated selection of systems I have engineered, showcasing backend scalability, real-time networking, and machine learning models.
             </p>
           </div>
 
+          {/* Interactive Project Filter Tabs */}
+          <div className="flex justify-center gap-3 mb-12 flex-wrap">
+            <button
+              onClick={() => setFilter('all')}
+              className={`px-4 py-2 text-xs font-mono rounded-full border transition-all duration-300 ${
+                filter === 'all'
+                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
+                  : 'bg-card/40 border-border/80 text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              All Projects ({projects.length})
+            </button>
+            <button
+              onClick={() => setFilter('web')}
+              className={`px-4 py-2 text-xs font-mono rounded-full border transition-all duration-300 ${
+                filter === 'web'
+                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
+                  : 'bg-card/40 border-border/80 text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Full-Stack & Real-Time ({projects.filter(p => p.category === 'web').length})
+            </button>
+            <button
+              onClick={() => setFilter('ai')}
+              className={`px-4 py-2 text-xs font-mono rounded-full border transition-all duration-300 ${
+                filter === 'ai'
+                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
+                  : 'bg-card/40 border-border/80 text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              AI & Python ({projects.filter(p => p.category === 'ai').length})
+            </button>
+          </div>
+
           {/* Projects Grid */}
-          <div className="grid gap-8">
-            {projects.map((project, index) => (
+          <div className="grid gap-8 md:grid-cols-2">
+            {filteredProjects.map((project, index) => (
               <Card
-                key={index}
-                className={`glass overflow-hidden hover:shadow-xl transition-all duration-300 ${
-                  project.featured ? 'border-primary/30' : ''
+                key={project.id}
+                className={`glass bg-card/40 border border-border/40 hover:shadow-xl transition-all duration-500 flex flex-col justify-between glow-border glow-shadow-sm ${project.glow} ${
+                  project.featured && filter === 'all' ? 'md:col-span-2' : 'md:col-span-1'
                 }`}
               >
-                <CardHeader className="pb-4">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 rounded-xl bg-primary/10 shrink-0">
-                        <project.icon className="h-6 w-6 text-primary" />
+                <div>
+                  <CardHeader className="pb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 text-left">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-full bg-primary/10 text-primary shrink-0">
+                          <project.icon className="h-6 w-6 animate-float" style={{ animationDelay: `${index * 0.5}s` }} />
+                        </div>
+                        <div>
+                          <CardTitle className="text-xl md:text-2xl flex flex-wrap items-center gap-2 font-bold">
+                            {project.title}
+                            {project.featured && (
+                              <Badge className="text-[9px] uppercase tracking-wider bg-primary/15 text-primary border border-primary/20 font-mono hover:bg-primary/25">
+                                Featured
+                              </Badge>
+                            )}
+                          </CardTitle>
+                          <CardDescription className="text-primary/95 font-medium mt-1 text-xs md:text-sm">
+                            {project.subtitle}
+                          </CardDescription>
+                        </div>
                       </div>
-                      <div>
-                        <CardTitle className="text-xl md:text-2xl flex items-center gap-2">
-                          {project.title}
-                          {project.featured && (
-                            <Badge variant="secondary" className="text-xs bg-primary/10 text-primary">
-                              Featured
-                            </Badge>
-                          )}
-                        </CardTitle>
-                        <CardDescription className="text-primary/80 font-medium">
-                          {project.subtitle}
-                        </CardDescription>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 shrink-0">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="border-primary/30 hover:bg-primary/10"
-                        asChild
-                      >
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="h-4 w-4 mr-2" />
-                          Code
-                        </a>
-                      </Button>
-                      {project.live && (
-                        <Button size="sm" className="bg-gradient-primary" asChild>
-                          <a href={project.live} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            Live Demo
+                      
+                      {/* Project Links */}
+                      <div className="flex gap-2 shrink-0">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-border hover:bg-secondary/80 font-medium rounded-full text-xs"
+                          asChild
+                        >
+                          <a href={project.github} target="_blank" rel="noopener noreferrer">
+                            <Github className="h-3.5 w-3.5 mr-1.5" />
+                            Source
                           </a>
                         </Button>
-                      )}
+                        {project.live && (
+                          <Button size="sm" className="bg-gradient-primary text-white hover:opacity-90 font-medium rounded-full text-xs" asChild>
+                            <a href={project.live} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                              Demo
+                            </a>
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">{project.description}</p>
+                  </CardHeader>
 
-                  {/* Features */}
-                  <div>
-                    <h4 className="font-semibold text-sm mb-2 text-foreground">Key Features:</h4>
-                    <ul className="grid sm:grid-cols-2 gap-1.5">
-                      {project.features.map((feature, fIndex) => (
-                        <li
-                          key={fIndex}
-                          className="text-sm text-muted-foreground flex items-start gap-2"
-                        >
-                          <span className="text-primary mt-1.5 shrink-0">•</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <CardContent className="space-y-4 text-left">
+                    <p className="text-muted-foreground text-base leading-relaxed">{project.description}</p>
 
+                    {/* Technical Achievements */}
+                    <div className="space-y-2.5">
+                      <h4 className="font-bold text-sm text-foreground uppercase tracking-wider font-mono flex items-center gap-1.5">
+                        <Layers className="h-3.5 w-3.5 text-primary" />
+                        Implementation Highlights:
+                      </h4>
+                      <ul className="space-y-1.5">
+                        {project.achievements.map((achievement, aIndex) => (
+                          <li
+                            key={aIndex}
+                            className="text-sm text-muted-foreground flex items-start gap-2.5 leading-relaxed"
+                          >
+                            <span className="text-primary mt-1 shrink-0">•</span>
+                            <span>{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </CardContent>
+                </div>
+
+                <CardContent className="pt-4 border-t border-border/20 mt-4 bg-muted/10 rounded-b-2xl">
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {project.techStack.map((tech, tIndex) => (
                       <Badge
                         key={tIndex}
-                        variant="secondary"
-                        className="text-xs font-medium"
+                        variant="outline"
+                        className="text-[9px] font-mono border-border/80 bg-card/70 text-muted-foreground px-2 py-0.5"
                       >
                         {tech}
                       </Badge>

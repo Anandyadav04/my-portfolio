@@ -1,134 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-/* Design System - Modern Tech Portfolio with Blue Accent */
-
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 222 47% 11%;
+    --background: 220 33% 98%;
+    --foreground: 224 71.4% 4.1%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 224 71.4% 4.1%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 250 84% 54%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.2 47.4% 11.2%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 250 84% 95%;
+    --accent-foreground: 250 84% 54%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 217 91% 60%;
+    --ring: 250 84% 54%;
 
-    --radius: 0.75rem;
+    --radius: 1.25rem;
 
-    /* Custom portfolio colors */
-    --tech-blue: 217 91% 60%;
-    --tech-blue-light: 217 91% 70%;
-    --tech-blue-dark: 217 91% 45%;
-    --tech-slate: 222 47% 11%;
-    --tech-gray: 220 9% 46%;
-    --gradient-start: 217 91% 60%;
-    --gradient-end: 199 89% 48%;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217 91% 60%;
+    --gradient-start: 250 84% 54%;
+    --gradient-end: 195 90% 50%;
   }
 
   .dark {
-    --background: 222 47% 6%;
+    --background: 240 10% 3.5%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 9%;
+    --card: 240 10% 5%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 9%;
+    --popover: 240 10% 4%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 250 84% 64%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 240 3.7% 12%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 240 3.7% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 250 84% 15%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 240 3.7% 12%;
+    --input: 240 3.7% 12%;
+    --ring: 250 84% 64%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 217 91% 60%;
-
-    /* Custom portfolio colors - dark mode */
-    --tech-blue: 217 91% 60%;
-    --tech-blue-light: 217 91% 70%;
-    --tech-blue-dark: 217 91% 50%;
-    --tech-slate: 210 40% 98%;
-    --tech-gray: 215 20% 65%;
-    --gradient-start: 217 91% 60%;
-    --gradient-end: 199 89% 48%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217 91% 60%;
+    --gradient-start: 250 84% 64%;
+    --gradient-end: 195 90% 50%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border selection:bg-primary/20 selection:text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
+    font-family: 'Outfit', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', system-ui, sans-serif;
-    @apply font-bold tracking-tight;
+    font-family: 'Outfit', sans-serif;
+    @apply tracking-tight font-semibold;
   }
 
   code, pre {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fira Code', monospace;
+  }
+
+  /* Sleek custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full hover:bg-primary/50 transition-colors;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r;
     background-image: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
   }
 
@@ -136,15 +115,98 @@
     background-image: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
   }
 
-  .glass {
-    @apply backdrop-blur-md bg-card/80 border border-border/50;
+  .glass-card {
+    @apply backdrop-blur-xl bg-card/40 border border-border/40 hover:border-primary/20 transition-all duration-300;
   }
 
-  .glow {
-    box-shadow: 0 0 40px hsl(var(--tech-blue) / 0.3);
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04),
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .dark .glass {
+    background: rgba(10, 10, 15, 0.6);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.035);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .cyber-grid {
+    background-size: 32px 32px;
+    background-image: linear-gradient(to right, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  }
+
+  .dark .cyber-grid {
+    background-image: linear-gradient(to right, rgba(99, 102, 241, 0.015) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(99, 102, 241, 0.015) 1px, transparent 1px);
+  }
+
+  .glow-ring {
+    position: relative;
+  }
+
+  .glow-ring::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    z-index: -1;
+    opacity: 0.4;
+    filter: blur(8px);
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-ring:hover::before {
+    opacity: 0.8;
+  }
+
+  .cyber-glow {
+    box-shadow: 0 0 35px hsl(var(--primary) / 0.15);
   }
 
   .section-padding {
-    @apply py-20 md:py-28;
+    @apply py-16 md:py-24;
   }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+
+/* Timeline Custom Dot */
+.timeline-marker::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+  left: -7px;
+  top: 6px;
+  box-shadow: 0 0 8px hsl(var(--primary));
+  z-index: 2;
 }
