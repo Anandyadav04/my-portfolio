@@ -7,7 +7,7 @@ const highlights = [
   {
     icon: GraduationCap,
     title: 'Academic Excellence',
-    description: 'Pursuing B.E. in Information Technology at APSIT with an outstanding CGPA of 9.61/10.',
+    description: 'Pursuing B.E. in Information Technology at APSIT with an outstanding CGPA of 9.0/10.',
   },
   {
     icon: Server,
@@ -84,7 +84,7 @@ const About = () => {
                 <p>
                   I am currently pursuing a Bachelor of Engineering in Information Technology at 
                   <strong className="text-foreground font-semibold"> A. P. Shah Institute of Technology</strong>, 
-                  Thane, maintaining a CGPA of <strong className="text-primary font-bold">9.61/10</strong>.
+                  Thane, maintaining a CGPA of <strong className="text-primary font-bold">9.0/10</strong>.
                 </p>
                 <p>
                   I love building full-stack web applications, with a strong focus on <strong className="text-foreground font-semibold">backend development, APIs, and databases</strong>. I have practical experience developing projects with the MERN stack (MongoDB, Express, React, Node) and Django.

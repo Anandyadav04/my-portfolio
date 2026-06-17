@@ -21,7 +21,7 @@ const projects = [
     ],
     techStack: ['Django', 'Python', 'TensorFlow', 'OpenCV', 'SQLite', 'MySQL'],
     github: 'https://github.com/Anandyadav04/MediTrack.git',
-    live: null,
+    live: 'https://meditrack-healthpro.vercel.app/',
     featured: true,
   },
   {
@@ -40,7 +40,7 @@ const projects = [
     ],
     techStack: ['React.js', 'Node.js', 'Express.js', 'Socket.IO', 'MongoDB', 'JWT', 'Tailwind CSS'],
     github: 'https://github.com/Anandyadav04/chatLance.git',
-    live: null,
+    live: 'https://chatlance-plus.vercel.app/',
     featured: true,
   },
   {

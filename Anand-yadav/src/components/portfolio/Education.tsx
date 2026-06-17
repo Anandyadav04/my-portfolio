@@ -21,7 +21,7 @@ const timelineList = [
     institution: 'A. P. Shah Institute of Technology (APSIT), Thane',
     field: 'Information Technology',
     period: '2023 – 2027',
-    metrics: 'CGPA: 9.61 / 10',
+    metrics: 'CGPA: 9.0 / 10',
     bullets: [
       'Focused on Core Computing Fundamentals: Algorithms, Database Management Systems (DBMS), and Software Architecture.',
       'Represented department in technical project competitions showcasing AI and web integrations.'

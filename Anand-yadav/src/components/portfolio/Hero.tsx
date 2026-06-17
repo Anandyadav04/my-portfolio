@@ -155,7 +155,7 @@ const Hero = () => {
                     <p><span className="text-indigo-400">const</span> engineer = &#123;</p>
                     <p className="pl-4">name: <span className="text-emerald-400">"Anand Yadav"</span>,</p>
                     <p className="pl-4">positioning: <span className="text-emerald-400">"Full-Stack & Backend Developer"</span>,</p>
-                    <p className="pl-4">academics: <span className="text-emerald-400">"B.E. IT | CGPA 9.61"</span>,</p>
+                    <p className="pl-4">academics: <span className="text-emerald-400">"B.E. IT | CGPA 9.0"</span>,</p>
                     <p className="pl-4">architectures: <span className="text-amber-400">["REST APIs", "WebSocket Systems", "Role-Based Auth"]</span>,</p>
                     <p className="pl-4">cloudInfra: <span className="text-amber-400">["AWS", "Google Cloud", "Docker"]</span></p>
                     <p>&#125;;</p>

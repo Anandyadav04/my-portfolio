@@ -37,7 +37,7 @@ Explore the live, fully interactive portfolio here: **[https://anand-yadav.verce
 * **Glassmorphism Design:** Vibrant accents, dark mode backgrounds, blur filters, and micro-interactions.
 * **Technical Skillset Grid:** Skill badges grouped by Languages, Frontend, Backend & Databases, Cloud & DevOps, and Tools & Security.
 * **Interactive Project Filter:** Dynamically toggle between Full-Stack/Web projects and AI/Python systems.
-* **Education Timeline:** Highlights academic excellence, including my B.E. in Information Technology at APSIT (CGPA: **9.61/10**).
+* **Education Timeline:** Highlights academic excellence, including my B.E. in Information Technology at APSIT (CGPA: **9.0/10**).
 * **Fully Functional Contact Form:** Sends inquiries directly to my inbox via EmailJS with comprehensive form validation.
 
 ---
@@ -49,12 +49,12 @@ The website showcases several of my development projects:
 1. 🩺 **MediTrack** *(AI Healthcare Platform)*
    * **Stack:** Django, Python, TensorFlow, OpenCV, SQLite, MySQL
    * **Highlights:** Integrated a TensorFlow machine learning model for skin disease prediction, scheduling automation, and automated reminders.
-   * **Source Code:** [MediTrack Repo](https://github.com/Anandyadav04/MediTrack.git)
+   * **Demo & Source:** [MediTrack Live](https://meditrack-healthpro.vercel.app/) | [MediTrack Repo](https://github.com/Anandyadav04/MediTrack.git)
 
 2. 💬 **ChatLance** *(Real-Time Messenger & Collaboration Hub)*
    * **Stack:** React.js, Node.js, Express.js, Socket.IO, MongoDB, JWT, Tailwind CSS
    * **Highlights:** High-performance, low-latency messaging, active presence, typing indicator events, and HTTP-only cookie JWT auth.
-   * **Source Code:** [ChatLance Repo](https://github.com/Anandyadav04/chatLance.git)
+   * **Demo & Source:** [ChatLance Live](https://chatlance-plus.vercel.app/) | [ChatLance Repo](https://github.com/Anandyadav04/chatLance.git)
 
 3. 🎓 **StudyBitz** *(LMS Learning Portal)*
    * **Stack:** React.js, Node.js, Express.js, MongoDB, JWT, Tailwind CSS
